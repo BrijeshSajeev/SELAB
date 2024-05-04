@@ -1,0 +1,42 @@
+package com.example;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class Main {
+    public static void main(String[] args) {      
+          System.setProperty("webdriver.chrome.driver", "C:\\Users\\Brijesh\\Desktop\\SE\\script\\chromedriver-win64\\chromedriver.exe");
+
+        // Initialize ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+        driver.manage().window().maximize(); 
+        // Navigate to the webpage
+        driver.get("https://example.com");
+
+        // Find all checkboxes on the webpage
+        java.util.List<WebElement> checkBoxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
+        // List<org.openqa.selenium.WebElement>CheckBoxes = driver.findElements(By.xpath("//input[@type='checkbox']")); 
+        // Get the count of checkboxes
+        int checkedCount = 0;
+        int uncheckedCount = 0;
+
+        // Iterate through each checkbox to determine if it's checked or not
+        for (WebElement checkbox : checkBoxes) {
+            if (checkbox.isSelected()) {
+                checkedCount++;
+            } else {
+                uncheckedCount++;
+            }
+        }
+
+        // Print the counts
+        System.out.println("Number of checked checkboxes: " + checkedCount);
+        System.out.println("Number of unchecked checkboxes: " + uncheckedCount);
+        
+}
+}
