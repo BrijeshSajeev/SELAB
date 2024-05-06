@@ -1,0 +1,55 @@
+package demo.main;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ExcelDataHandling {
+    public static void main(String[] args) throws Exception {
+        // Path to the Excel file
+        String excelFilePath = "path/to/your/excelFile.xls";
+
+        // Open the Excel workbook
+        Workbook workbook = Workbook.getWorkbook(new File(excelFilePath));
+
+        // Access the first sheet in the workbook
+        Sheet sheet = workbook.getSheet(0);
+
+        // Launch Chrome browser
+        ChromeDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        // Iterate through each row in the Excel sheet
+        for (int row = 1; row < sheet.getRows(); row++) { // Assuming the first row contains headers
+            // Accessing cells in the row
+            Cell studentNameCell = sheet.getCell(0, row); // Assuming student names are in the first column
+            Cell subject1Cell = sheet.getCell(1, row); // Assuming subject1 scores are in the second column
+            Cell subject2Cell = sheet.getCell(2, row); // Assuming subject2 scores are in the third column
+            Cell subject3Cell = sheet.getCell(3, row); // Assuming subject3 scores are in the fourth column
+
+            // Extracting data from cells
+            String studentName = studentNameCell.getContents();
+            int subject1Score = Integer.parseInt(subject1Cell.getContents());
+            int subject2Score = Integer.parseInt(subject2Cell.getContents());
+            int subject3Score = Integer.parseInt(subject3Cell.getContents());
+
+            // Checking if the student has scored more than 60 in any subject
+            if (subject1Score > 60 || subject2Score > 60 || subject3Score > 60) {
+                System.out.println(studentName + " has scored more than 60 in at least one subject.");
+                // You can perform further actions here, such as logging into a website and performing operations.
+            }
+        }
+
+        // Close the browser
+        driver.quit();
+
+        // Close the workbook
+        workbook.close();
+    }
+}

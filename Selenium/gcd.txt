@@ -1,32 +1,27 @@
+package com.gcdCalc;
+
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
-public class Gcd2 {
-    private WebDriver driver;
-
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\\\Users\\\\annex\\\\Desktop\\\\chromedriver\\\\chromedriver_win32 -new\\\\chromedriver.exe");
-        driver = new ChromeDriver();
-    }
-
-    @Test
-    public void testGcd() {
-        driver.get("file:///C:/GCD.html");
-        driver.manage().window().maximize();
-        driver.findElement(By.name("n1")).sendKeys("5");
-        driver.findElement(By.name("n2")).sendKeys("6");
-        driver.findElement(By.cssSelector("input[type='button']")).click();
-        String result = driver.findElement(By.name("result")).getAttribute("value");
-        System.out.println("the gcd is : " + result);
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
+public class Main {
+public static void main(String[] args) {
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("C:\\Users\\Brijesh\\Desktop\\SELAB\\Selenium\\gcd.html");
+	
+	WebElement num1 = driver.findElement(By.id("num1"));
+	num1.sendKeys("12");
+	WebElement num2 = driver.findElement(By.id("num2"));
+	num2.sendKeys("6");
+	WebElement calculateButton = driver.findElement(By.tagName("button"));
+    calculateButton.click();
+	
+	
+	WebElement result = driver.findElement(By.id("result"));
+	String re = result.getText();
+	System.out.println("The GCD is : "+re);
+	driver.quit();
+}
 }
