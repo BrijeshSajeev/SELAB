@@ -1,0 +1,28 @@
+public static void main(String[] args) {
+       
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+       
+        WebDriver driver = new ChromeDriver();
+
+        
+        driver.get("https://www.linkedin.com/login");
+
+       
+        WebElement emailField = driver.findElement(By.id("username"));
+        emailField.sendKeys("your_email@example.com");
+
+        
+        WebElement passwordField = driver.findElement(By.id("password"));
+        passwordField.sendKeys("your_password");
+
+        
+        WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
+        loginButton.click();
+
+       
+       driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        
+         driver.quit();
+    }

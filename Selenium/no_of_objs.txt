@@ -1,0 +1,26 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ObjectCounter {
+    public static void main(String[] args) {
+        // Set the path to Chrome driver executable
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // Initialize ChromeDriver
+        ChromeDriver driver = new ChromeDriver();
+
+        // Navigate to the webpage
+        driver.get("https://example.com");
+
+        // Find all elements on the webpage
+        java.util.List<WebElement> allElements = driver.findElements(By.xpath("//*"));
+
+        // Print the total number of objects
+        System.out.println("Total number of objects on the page: " + allElements.size());
+
+        // Close the browser
+        driver.quit();
+    }
+}
